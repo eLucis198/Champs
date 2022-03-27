@@ -9,12 +9,12 @@ using Champs.Domain.Interfaces;
 
 namespace Champs.Application.Services
 {
-    public class StatServices : IStatServices
+    public class StatService : IStatService
     {
         private IStatRepository _statRepository;
         private readonly IMapper _mapper;
 
-        public StatServices(IStatRepository statRepository, IMapper mapper)
+        public StatService(IStatRepository statRepository, IMapper mapper)
         {
             _statRepository = statRepository ?? throw new ArgumentNullException(nameof(statRepository));
             _mapper = mapper;

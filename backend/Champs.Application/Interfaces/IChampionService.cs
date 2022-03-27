@@ -4,7 +4,7 @@ using Champs.Application.DTOs;
 
 namespace Champs.Application.Interfaces
 {
-    public interface IChampionServices
+    public interface IChampionService
     {
         Task<IEnumerable<ChampionDTO>> GetChampions();
         Task<ChampionDTO> GetById(int? id);

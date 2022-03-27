@@ -9,12 +9,12 @@ using Champs.Domain.Interfaces;
 
 namespace Champs.Application.Services
 {
-    public class ChampionServices : IChampionServices
+    public class ChampionService : IChampionService
     {
         private IChampionRepository _championRepository;
         private readonly IMapper _mapper;
 
-        public ChampionServices(IChampionRepository championRepository, IMapper mapper)
+        public ChampionService(IChampionRepository championRepository, IMapper mapper)
         {
             _championRepository = championRepository ?? throw new ArgumentNullException(nameof(championRepository));
             _mapper = mapper;

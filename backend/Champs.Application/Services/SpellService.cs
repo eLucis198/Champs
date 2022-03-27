@@ -9,12 +9,12 @@ using Champs.Domain.Interfaces;
 
 namespace Champs.Application.Services
 {
-    public class SpellServices : ISpellServices
+    public class SpellService : ISpellService
     {
         private ISpellRepository _spellRepository;
         private readonly IMapper _mapper;
 
-        public SpellServices(ISpellRepository spellRepository, IMapper mapper)
+        public SpellService(ISpellRepository spellRepository, IMapper mapper)
         {
             _spellRepository = spellRepository ?? throw new ArgumentNullException(nameof(spellRepository));
             _mapper = mapper;

@@ -4,7 +4,7 @@ using Champs.Application.DTOs;
 
 namespace Champs.Application.Interfaces
 {
-    public interface IStatServices
+    public interface IStatService
     {
         Task<IEnumerable<StatDTO>> GetStats();
         Task<StatDTO> GetById(int? id);

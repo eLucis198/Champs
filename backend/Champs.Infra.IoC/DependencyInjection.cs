@@ -1,3 +1,6 @@
+using Champs.Application.Interfaces;
+using Champs.Application.Mappings;
+using Champs.Application.Services;
 using Champs.Domain.Interfaces;
 using Champs.Infra.Data.Context;
 using Champs.Infra.Data.Repositories;
@@ -16,11 +19,24 @@ namespace Champs.Infra.IoC
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), 
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
+            services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
+
+            services.AddRepositories();
+            services.AddServices();
+
+            return services;
+        }
+
+        private static void AddRepositories(this IServiceCollection services){
             services.AddScoped<IChampionRepository, ChampionRepository>();
             services.AddScoped<IStatRepository, StatRepository>();
             services.AddScoped<ISpellRepository, SpellRepository>();
+        }
 
-            return services;
+        private static void AddServices(this IServiceCollection services){
+            services.AddScoped<IChampionService, ChampionService>();
+            services.AddScoped<IStatService, StatService>();
+            services.AddScoped<ISpellService, SpellService>();
         }
     }
 }

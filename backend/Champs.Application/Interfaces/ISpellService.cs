@@ -4,7 +4,7 @@ using Champs.Application.DTOs;
 
 namespace Champs.Application.Interfaces
 {
-    public interface ISpellServices
+    public interface ISpellService
     {
         Task<IEnumerable<SpellDTO>> GetSpells();
         Task<SpellDTO> GetById(int? id);
