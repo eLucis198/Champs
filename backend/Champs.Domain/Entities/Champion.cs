@@ -53,7 +53,7 @@ namespace Champs.Domain.Entities
 
             DomainExceptionValidation.When(
                 title?.Length > 60,
-                "Invalid name. Maximum 60 characters!");
+                "Invalid title. Maximum 60 characters!");
 
             Name = name;
             Title = title;

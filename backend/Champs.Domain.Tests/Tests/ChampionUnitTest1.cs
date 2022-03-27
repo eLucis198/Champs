@@ -84,7 +84,7 @@ namespace Champs.Domain.Tests
             Action action = () => new Champion(1, "Aatrox", "the Darkin Bladethe Darkin Bladethe Darkin Bladethe Darkin Blade");
             action.Should()
                 .Throw<Validation.DomainExceptionValidation>()
-                .WithMessage("Invalid name. Maximum 60 characters!");
+                .WithMessage("Invalid title. Maximum 60 characters!");
         }
     }
 }
