@@ -1,0 +1,3 @@
+{
+    "dotnet-test-explorer.testProjectPath": "backend/Champs.Domain.Tests/*Tests.@(csproj|vbproj|fsproj)"
+}
