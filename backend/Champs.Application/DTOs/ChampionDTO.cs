@@ -18,5 +18,7 @@ namespace Champs.Application.DTOs
         [MaxLength(60)]
         [DisplayName("Title")]
         public string Title { get; set; }
+        
+        public StatDTO Stat {get;set;}
     }
 }

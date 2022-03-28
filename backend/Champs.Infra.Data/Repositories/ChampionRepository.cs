@@ -19,12 +19,16 @@ namespace Champs.Infra.Data.Repositories
 
         public async Task<IEnumerable<Champion>> GetChampionsAsync()
         {
-            return await _context.Champions.ToListAsync();
+            return await _context.Champions
+                .Include(champion => champion.Stat)
+                .ToListAsync();
         }
 
         public async Task<Champion> GetByIdAsync(int? id)
         {
-            return await _context.Champions.FindAsync(id);
+            return await _context.Champions
+                .Include(champion => champion.Stat)
+                .FirstOrDefaultAsync(champion => champion.Id == id);
         }
 
         public async Task<Champion> CreateAsync(Champion champion)

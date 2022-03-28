@@ -8,9 +8,9 @@ namespace Champs.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ChampionController
+    public class ChampionController : ControllerBase
     {
-        private IChampionService _championService;
+        private readonly IChampionService _championService;
 
         public ChampionController(IChampionService championService)
         {
@@ -18,8 +18,46 @@ namespace Champs.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ChampionDTO>> GetChampions(){
-            return await _championService.GetChampions();
+        public async Task<ActionResult<IEnumerable<ChampionDTO>>> GetChampions()
+        {
+            var champions = await _championService.GetChampions();
+
+            if (champions == null)
+                return NotFound("Champions not found");
+
+            return Ok(champions);
+        }
+
+        [HttpGet("{id:int}", Name = "GetChampion")]
+        public async Task<ActionResult<ChampionDTO>> GetChampion(int id)
+        {
+            var champion = await _championService.GetById(id);
+            if (champion == null)
+                return NotFound("Champion not found");
+
+            return Ok(champion);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> PostChampion([FromBody] ChampionDTO championDto)
+        {
+            if (championDto == null)
+                return BadRequest("Invalid data");
+
+            await _championService.Create(championDto);
+
+            return new CreatedAtRouteResult("GetChampion", new { id = championDto.Id }, championDto);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<ChampionDTO>> DeleteChampion(int id)
+        {
+            var champion = await _championService.GetById(id);
+            if (champion == null)
+                return NotFound("Champion not found");
+
+            await _championService.Delete(id);
+            return Ok(champion);
         }
     }
 }

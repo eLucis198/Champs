@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using Champs.Domain.Validation;
 
 namespace Champs.Domain.Entities
@@ -8,8 +9,13 @@ namespace Champs.Domain.Entities
         public string Name { get; private set; }
         public string Title { get; private set; }
 
+        [NotMapped]
         public Stat Stat { get; set; }
+        [NotMapped]
         public ICollection<Spell> Spells { get; set; }
+
+        public Champion()
+        { }
 
         public Champion(string name, string title)
         {

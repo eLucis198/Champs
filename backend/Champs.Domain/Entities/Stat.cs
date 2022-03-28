@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using Champs.Domain.Validation;
 
 namespace Champs.Domain.Entities
@@ -11,8 +12,12 @@ namespace Champs.Domain.Entities
         public decimal HealthPoolRegen { get; private set; }
         public decimal HealthPoolRegenPerLevel { get; private set; }
         public int ChampionId { get; private set; }
-
+        
+        [NotMapped]
         public Champion Champion { get; set; }
+
+        public Stat()
+        { }
 
         public Stat(int attackRange, decimal baseHealthPool, decimal healthPoolPerLevel,
             decimal healthPoolRegen, decimal healthPoolRegenPerLevel)

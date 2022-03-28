@@ -27,9 +27,5 @@ namespace Champs.Application.DTOs
         [Column(TypeName = "decimal(5,2)")]
         [DisplayName("Health Regen Per Level")]
         public decimal HealthPoolRegenPerLevel { get; set; }
-
-        [DisplayName("Champions")]
-        public int ChampionId { get; set; }
-        public ChampionDTO Champion { get; set; }
     }
 }
