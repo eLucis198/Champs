@@ -21,7 +21,6 @@ namespace Champs.API.Controllers
         public async Task<ActionResult<IEnumerable<ChampionDTO>>> GetChampions()
         {
             var champions = await _championService.GetChampions();
-
             if (champions == null)
                 return NotFound("Champions not found");
 
@@ -41,10 +40,31 @@ namespace Champs.API.Controllers
         [HttpPost]
         public async Task<ActionResult> PostChampion([FromBody] ChampionDTO championDto)
         {
-            if (championDto == null)
+            if (championDto == null || championDto.Stat == null)
                 return BadRequest("Invalid data");
 
             await _championService.Create(championDto);
+
+            return new CreatedAtRouteResult("GetChampion", new { id = championDto.Id }, championDto);
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> PutChampion(int id, [FromBody] ChampionDTO championDto)
+        {
+            if (championDto == null || championDto.Stat == null)
+                return BadRequest("Invalid data");
+
+            if (id != championDto.Id)
+                return BadRequest("Invalid data");
+
+            var champion = await _championService.GetById(id);
+            if (champion == null)
+                return NotFound("Champion not found");
+
+            if (champion.Stat.Id != championDto.Stat.Id)
+                return BadRequest("Invalid data");
+
+            await _championService.Update(championDto);
 
             return new CreatedAtRouteResult("GetChampion", new { id = championDto.Id }, championDto);
         }
